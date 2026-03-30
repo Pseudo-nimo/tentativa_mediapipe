@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+message SkeletonsDetectorOptions {
+  // Optional image resize before inference (set width/height to 0 to disable)
+  message Resize {
+    uint32 width = 1;
+    uint32 height = 2;
+  }
+
+  // MediaPipe Pose configuration
+  message MediapipeOptions {
+    // Treat every frame as independent (disables tracking between frames)
+    bool static_image_mode = 1;
+    // Model complexity: 0 = Lite, 1 = Full, 2 = Heavy
+    int32 model_complexity = 2;
+    // Apply smoothing filter to landmark coordinates across frames
+    bool smooth_landmarks = 3;
+    // Minimum detection confidence threshold [0.0, 1.0]
+    float min_detection_confidence = 4;
+    // Minimum tracking confidence threshold [0.0, 1.0]
+    float min_tracking_confidence = 5;
+  }
+
+  string broker_uri = 1;
+  string zipkin_host = 2;
+  uint32 zipkin_port = 3;
+  uint32 zipkin_batch_size = 4;
+  MediapipeOptions mediapipe = 5;
+  Resize resize = 6;
+}
