@@ -1,4 +1,4 @@
-FROM python:3.10-slim
+FROM is-skeletons-detector/dev
 
 WORKDIR /opt/is
 
