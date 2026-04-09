@@ -20,6 +20,7 @@ setup(
     install_requires=[
         'is-wire>=1.1.2',
         'is-msgs>=1.1.8',
+        'opencensus-ext-zipkin',
         'mediapipe>=0.10.0',
         'opencv-python>=4.5.0',
         'python-dateutil',

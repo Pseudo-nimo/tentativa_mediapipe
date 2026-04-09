@@ -1,7 +1,8 @@
 from functools import partial
 
 from is_wire.core import Channel, Status, StatusCode, Logger
-from is_wire.core import Tracer, ZipkinExporter, BackgroundThreadTransport
+from is_wire.core import Tracer, AsyncTransport
+from opencensus.ext.zipkin.trace_exporter import ZipkinExporter
 from is_wire.rpc import ServiceProvider, LogInterceptor, TracingInterceptor
 from is_msgs.image_pb2 import Image, ObjectAnnotations
 
@@ -38,7 +39,7 @@ def main():
         service_name=service_name,
         host_name=op.zipkin_host,
         port=op.zipkin_port,
-        transport=BackgroundThreadTransport(max_batch_size=max_batch_size),
+        transport=AsyncTransport,
     )
     provider.add_interceptor(TracingInterceptor(exporter=exporter))
 
