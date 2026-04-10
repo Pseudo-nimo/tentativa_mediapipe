@@ -2,9 +2,10 @@ import re
 import dateutil.parser as dp
 
 from is_wire.core import Subscription, Message, Logger
-from is_wire.core import Tracer, AsyncTransport
-
+from is_wire.core import Tracer, BackgroundThreadTransport 
 from opencensus.ext.zipkin.trace_exporter import ZipkinExporter
+'''
+from opencensus.ext.zipkin.trace_exporter import '''
 from is_msgs.image_pb2 import Image
 
 from .stream_channel import StreamChannel
@@ -33,7 +34,7 @@ def main():
         service_name=service_name,
         host_name=op.zipkin_host,
         port=op.zipkin_port,
-        transport=AsyncTransport(max_batch_size=max_batch_size),
+        transport=BackgroundThreadTransport(max_batch_size=max_batch_size),
     )
 
     subscription = Subscription(channel=channel, name=service_name)

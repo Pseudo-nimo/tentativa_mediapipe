@@ -1,10 +1,10 @@
-FROM tensorflow/tensorflow:2.15.0-gpu
+FROM tensorflow/tensorflow:2.13.0-gpu
 
 RUN pip uninstall -y jupyter ipykernel                               \
  && rm -rf /notebooks                                                \ 
  && rm -f /run_jupyter.sh                                            \
  && rm -f /root/.jupyter/jupyter_notebook_config.py                  \
- && rm -f /tensorflow_gpu-2.15.0-cp38-cp38-manylinux2010_x86_64.whl
+ && rm -f /tensorflow_gpu-2.13.0-cp38-cp38-manylinux2010_x86_64.whl
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git wget libsm6 libxext6 libxrender-dev 

@@ -42,7 +42,7 @@ function docker::rebuild_image {
 
 image_dev='is-skeletons-detector/dev'
 docker_user="paulinojunior"
-remote_tag='mediapose/dev:latest'
+remote_tag='mediapose.dev:latest'
 
 if ! docker::has_image ${image_dev}; then
     docker::build_local ${image_dev} Dockerfile.dev_gpu ../../

@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Pre-install heavy dependencies so iterative development is faster
 RUN pip install --no-cache-dir \
-        "mediapipe>=0.10.0" \
+        "mediapipe>=0.10.5" \
         "opencv-python>=4.5.0" \
         "is-wire>=1.1.2" \
         "is-msgs>=1.1.8" \
