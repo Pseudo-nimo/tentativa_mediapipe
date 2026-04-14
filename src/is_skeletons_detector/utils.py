@@ -15,6 +15,7 @@ def load_options() -> SkeletonsDetectorOptions:
     log = Logger(name='LoadOptions')
     op_file = sys.argv[1] if len(sys.argv) > 1 else 'options.json'
     try:
+        print("debug2")
         with open(op_file, 'r') as f:
             try:
                 op = Parse(f.read(), SkeletonsDetectorOptions())
@@ -22,8 +23,20 @@ def load_options() -> SkeletonsDetectorOptions:
                 return op
             except Exception as ex:
                 log.critical("Unable to load options from '{}'. \n{}", op_file, ex)
+
     except Exception as ex:
-        log.critical("Unable to open file '{}'", op_file)
+        print("debug3")
+        #log.critical("Unable to open file '{}'", op_file)
+        from pathlib import Path
+
+        BASE_DIR = Path(__file__).resolve().parents[2]
+        OPTIONS_PATH = BASE_DIR / "etc" / "conf" / "options.json"
+
+        print("Loading options from:", OPTIONS_PATH)
+
+        with open(OPTIONS_PATH, "r", encoding="utf-8") as f:
+            options = Parse(f.read(), SkeletonsDetectorOptions())
+        return options
     # Logger.critical already calls exit(-1); this line is never reached.
     raise SystemExit(1)  # pragma: no cover
 

@@ -1,5 +1,5 @@
 {
-  "broker_uri": "amqp://localhost:5672",
+  "broker_uri": "amqp://guest:guest@localhost:5672",
   "zipkin_host": "localhost",
   "zipkin_port": 9411,
   "zipkin_batch_size": 100,

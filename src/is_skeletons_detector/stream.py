@@ -2,8 +2,7 @@ import re
 import dateutil.parser as dp
 
 from is_wire.core import Subscription, Message, Logger
-from is_wire.core import Tracer, BackgroundThreadTransport 
-from opencensus.ext.zipkin.trace_exporter import ZipkinExporter
+from is_wire.core import Tracer
 '''
 from opencensus.ext.zipkin.trace_exporter import '''
 from is_msgs.image_pb2 import Image
@@ -21,21 +20,17 @@ def _span_duration_ms(span):
 def main():
     service_name = 'SkeletonsDetector.Detection'
     re_topic = re.compile(r'CameraGateway\.(\w+)\.Frame')
-
+    print("debug")
     op = load_options()
     sd = SkeletonsDetector(op)
 
     log = Logger(name=service_name)
+    print("debug")
     channel = StreamChannel(op.broker_uri)
     log.info('Connected to broker {}', op.broker_uri)
 
     max_batch_size = max(100, op.zipkin_batch_size)
-    exporter = ZipkinExporter(
-        service_name=service_name,
-        host_name=op.zipkin_host,
-        port=op.zipkin_port,
-        transport=BackgroundThreadTransport(max_batch_size=max_batch_size),
-    )
+
 
     subscription = Subscription(channel=channel, name=service_name)
     subscription.subscribe('CameraGateway.*.Frame')
@@ -43,7 +38,7 @@ def main():
     while True:
         msg, dropped = channel.consume(return_dropped=True)
 
-        tracer = Tracer(exporter, span_context=msg.extract_tracing())
+        tracer = Tracer(None, span_context=msg.extract_tracing())
         span = tracer.start_span(name='detection_and_render')
         detection_span = None
 
