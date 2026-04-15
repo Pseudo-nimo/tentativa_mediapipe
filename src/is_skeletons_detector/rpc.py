@@ -1,8 +1,7 @@
 from functools import partial
 
 from is_wire.core import Channel, Status, StatusCode, Logger
-from is_wire.core import Tracer, ZipkinExporter, BackgroundThreadTransport
-from is_wire.rpc import ServiceProvider, LogInterceptor, TracingInterceptor
+from is_wire.rpc import ServiceProvider, LogInterceptor
 from is_msgs.image_pb2 import Image, ObjectAnnotations
 
 from .skeletons import SkeletonsDetector

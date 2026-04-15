@@ -22,8 +22,7 @@ setup(
         'numpy<2',
         'is-msgs>=1.1.8',
         'mediapipe',
-        'opencensus-ext-zipkin',
-        'opencv-python>=4.5.0',
+        'opencv-python==4.6.0.66',
         'python-dateutil',
     ],
 )

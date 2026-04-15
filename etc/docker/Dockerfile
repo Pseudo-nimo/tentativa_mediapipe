@@ -1,4 +1,4 @@
-FROM python:3.10-slim
+FROM python:3.11-slim
 
 WORKDIR /opt/is
 
@@ -21,4 +21,4 @@ COPY etc/conf/options.json .
 
 RUN pip install --no-cache-dir .
 
-CMD ["is-skeletons-detector-stream"]
+CMD ["is-skeletons-detector-rpc"]
